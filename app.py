@@ -5,8 +5,18 @@ import openai
 # Load environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+if not OPENAI_API_KEY:
+    raise ValueError("Missing OpenAI API Key. Please set OPENAI_API_KEY in environment variables.")
+
+openai.api_key = OPENAI_API_KEY
+
 # Initialize Flask app
 app = Flask(__name__)
+
+# Health Check Route
+@app.route('/')
+def home():
+    return jsonify({"message": "AI Coaching API is running!"})
 
 # API Route: Generate Coaching Plan
 @app.route('/generate_coaching_plan', methods=['POST'])
