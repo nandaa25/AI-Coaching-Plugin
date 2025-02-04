@@ -1,13 +1,9 @@
 import os
-from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 import openai
 
 # Load environment variables
-load_dotenv()
-
-# OpenAI API Key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -42,4 +38,4 @@ def generate_coaching_plan():
 
 # Ensure Flask app runs on Vercel
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=8000)
