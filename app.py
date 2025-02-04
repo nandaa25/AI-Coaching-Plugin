@@ -40,6 +40,6 @@ def generate_coaching_plan():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Ensure the app runs on Vercel
+# Ensure Flask app runs on Vercel
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
