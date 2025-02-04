@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/generate_coaching_plan",
+      "src": "/(.*)",
       "dest": "app.py"
     }
   ]
