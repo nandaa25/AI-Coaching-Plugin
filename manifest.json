@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AI Coaching Assistant",
+  "name_for_model": "ai_coaching",
+  "description_for_human": "Your personal AI coach for achieving any goal!",
+  "description_for_model": "An AI-driven personal coaching assistant that generates structured coaching plans.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://your-api-name.vercel.app/openapi.json"
+  },
+  "logo_url": "https://your-api-name.vercel.app/logo.png",
+  "contact_email": "your-email@example.com",
+  "legal_info_url": "https://your-website.com/legal"
+}
