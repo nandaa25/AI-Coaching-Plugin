@@ -12,18 +12,19 @@ openai.api_key = OPENAI_API_KEY
 # Initialize Flask app
 app = Flask(__name__)
 
-# Health Check Route
-@app.route('/')
+# Home Route (GET Request)
+@app.route("/", methods=["GET"])
 def home():
     return jsonify({"message": "AI Coaching API is running!"})
 
-# API Route: Generate Coaching Plan (Fix 405 Error)
-@app.route('/generate_coaching_plan', methods=['POST'])
+# Coaching Plan Route (POST Request)
+@app.route("/generate_coaching_plan", methods=["POST"])
 def generate_coaching_plan():
-    if request.method != "POST":
-        return jsonify({"error": "Invalid request method"}), 405
-
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No JSON data received"}), 400
+
     goal = data.get("goal")
     time_per_day = data.get("time_per_day")
     challenge_level = data.get("challenge_level")
@@ -47,6 +48,9 @@ def generate_coaching_plan():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Ensure Flask app runs correctly
+# Run Flask app for Vercel
+def handler(event, context):
+    return app(event, context)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
