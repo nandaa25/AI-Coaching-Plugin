@@ -2,8 +2,9 @@ import os
 from flask import Flask, request, jsonify
 import openai
 
-# Load environment variables
+# Load OpenAI API Key from Environment Variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API Key. Please set OPENAI_API_KEY in environment variables.")
 
