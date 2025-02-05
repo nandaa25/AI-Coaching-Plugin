@@ -4,7 +4,6 @@ import openai
 
 # Load environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API Key. Please set OPENAI_API_KEY in environment variables.")
 
@@ -18,11 +17,13 @@ app = Flask(__name__)
 def home():
     return jsonify({"message": "AI Coaching API is running!"})
 
-# API Route: Generate Coaching Plan
+# API Route: Generate Coaching Plan (Fix 405 Error)
 @app.route('/generate_coaching_plan', methods=['POST'])
 def generate_coaching_plan():
+    if request.method != "POST":
+        return jsonify({"error": "Invalid request method"}), 405
+
     data = request.get_json()
-    
     goal = data.get("goal")
     time_per_day = data.get("time_per_day")
     challenge_level = data.get("challenge_level")
@@ -46,6 +47,6 @@ def generate_coaching_plan():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Ensure Flask app runs on Vercel
+# Ensure Flask app runs correctly
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
